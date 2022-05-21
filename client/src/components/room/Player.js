@@ -1,12 +1,13 @@
+// eslint-disable react-hooks/exhaustive-deps
 import { useEffect, useContext, createRef } from 'react'
 import styled from 'styled-components'
 import YouTube from 'react-youtube'
-import { SignalContext} from '../../contexts/SignalContext'
+import { SignalContext } from '../../contexts/SignalContext'
 
 
 export default function Player(props) {
 
-    const StyledPlayer = styled.div`
+	const StyledPlayer = styled.div`
 	margin-top: 30px;
 	background-color: black;
 	width: 100%;
@@ -64,9 +65,11 @@ export default function Player(props) {
 		player.stopVideo();
 		signalDispatch({ type: 'SET_TRANSITION', transition: false });
 	};
-
-	useEffect(onVideoPlay, [signalData.playVideo]);
-	useEffect(onVideoPause, [signalData.pauseVideo]);
+	// eslint-disable-next-line 
+	useEffect(onVideoPlay, [signalData.playVideo])
+	// eslint-disable-next-line
+	useEffect(onVideoPause, [signalData.pauseVideo])
+	// eslint-disable-next-line
 	useEffect(loadNewVideo, [videoId]);
 
 	const onStateChange = (e) => {

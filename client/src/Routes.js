@@ -10,17 +10,17 @@ import Footer from './components/common/Footer';
 
 export default function RoutesPath() {
   return (
-  <Router>
-  <div style={{ minHeight: '100%' }}>
-  <Routes>
-  <Route path="/" element={<Welcome />} />
-  <Route path="/room/:id" element={<Room />} />
-				</Routes>
-  <Visible xs>
-  <div style={{ marginBottom: '60px' }} />
-				</Visible>
-			</div>
-  <Footer />
-		</Router>
+    <Router>
+      <div style={{ minHeight: '100%' }}>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/room/:id" element={<Room />} />
+        </Routes>
+        <Visible xs>
+          <div style={{ marginBottom: '60px' }} />
+        </Visible>
+      </div>
+      <Footer />
+    </Router>
   );
 }

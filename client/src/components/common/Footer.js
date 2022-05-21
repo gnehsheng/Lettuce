@@ -17,17 +17,17 @@ export default function Footer() {
 	text-align: center;
     `;
   return (
-      <StyledFooter>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-                Created by Ng Yong Sheng (Source at
-              <a
-                  href="https://github.com/gnehsheng?tab=repositories"
-                  target=""
-                >
+    <StyledFooter>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        Created by Ng Yong Sheng (Source at
+        <a
+          href="https://github.com/gnehsheng?tab=repositories"
+          target=""
+        >
                     &nbsp;github
-                </a>
-)
-</div>
-        </StyledFooter>
+        </a>
+        )
+      </div>
+    </StyledFooter>
   );
 }

@@ -7,9 +7,9 @@ export default function Intro() {
     `;
 
   return (
-      <>
-            <Header>YT Party</Header>
-            <P>Watch Youtube with your friends!</P>
-        </>
+    <>
+      <Header>YT Party</Header>
+      <P>Watch Youtube with your friends!</P>
+    </>
   );
 }

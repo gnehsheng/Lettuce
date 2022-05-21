@@ -1,15 +1,13 @@
-
 import styled from 'styled-components';
 import { spinAnimation } from './LoadingSpinner';
 import { colors } from './colors';
 
 export default function Button({ children, isLoading, ...props }) {
-
   const StyledButton = styled.button`
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: centerF;
 	padding: 6px;
 	min-width: 90px;
 	outline: none;
@@ -21,8 +19,7 @@ export default function Button({ children, isLoading, ...props }) {
 	font-size: 1.2em;
 	margin: 0 2px;
 	border: 1px solid ${colors.accentColor};
-	background-color: ${(props) =>
-    (props.secondary ? 'transparent' : colors.accentColor)};
+	background-color: ${(props) => (props.secondary ? 'transparent' : colors.accentColor)};
 	box-shadow: 2px 2px 5px #ccc;
 	color: ${(props) => (props.secondary ? colors.accentColor : 'white')};
 	cursor: pointer;
@@ -40,14 +37,14 @@ export default function Button({ children, isLoading, ...props }) {
 	animation: ${spinAnimation} 2s linear infinite;
     `;
   return (
-      <StyledButton {...props} isLoading={isLoading}>
-          {isLoading ? (
-              <Loading>
-                  <ion-icon name="refresh-circle-outline" style={{ fontSize: '1.1em' }} />
+    <StyledButton {...props} isLoading={isLoading}>
+      {isLoading ? (
+        <Loading>
+          <ion-icon name="refresh-circle-outline" style={{ fontSize: '1.1em' }} />
 
-                </Loading>
-            ) : null}
-          {children}
-        </StyledButton>
+        </Loading>
+      ) : null}
+      {children}
+    </StyledButton>
   );
 }

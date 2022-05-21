@@ -10,9 +10,7 @@ import { getVideoId } from '../../utils/helper';
 import { SignalContext } from '../../contexts/SignalContext';
 import { UserContext } from '../../contexts/UserContext';
 
-
 export default function Room(props) {
-
   const showInviteModal = async () => {
     await Swal.fire({
       title: 'Invite friends with this link',
@@ -77,7 +75,7 @@ export default function Room(props) {
           title: 'Enter your username',
           input: 'text',
           allowOutsideClick: false,
-                });
+        });
         username = usernamePrompt.value;
       }
 
@@ -98,36 +96,35 @@ export default function Room(props) {
     bindSocketEvents(_socket, {
       userDispatch,
       signalDispatch,
-        });
+    });
     setRoomLoading(false);
   }
 
   useEffect(
-() => {
-    init();
-  }, // eslint-disable-next-line
+    () => {
+      init();
+    }, // eslint-disable-next-line
         []
   );
 
   return (
-      <>
-            <TopBar />
-            {roomLoading ? (
-                <LoadingSpinner />
-            ) : (
-                <Container fluid style={{ margin: '0 3%' }}>
-                    <Row>
-                        <Col md={8}>
-                            <Player socket={socket} videoId={userData.videoId} />
-                        </Col>
-                        <Col md={4}>
-                            <Options onInvite={showInviteModal} alertNotImplemented={alertNotImplemented} onVideoChange={onVideoChange} />
+    <>
+      <TopBar />
+      {roomLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <Container fluid style={{ margin: '0 3%' }}>
+          <Row>
+            <Col md={8}>
+              <Player socket={socket} videoId={userData.videoId} />
+            </Col>
+            <Col md={4}>
+              <Options onInvite={showInviteModal} alertNotImplemented={alertNotImplemented} onVideoChange={onVideoChange} />
 
-                        </Col>
-                    </Row>
-                </Container>
-            )}
-        </>
+            </Col>
+          </Row>
+        </Container>
+      )}
+    </>
   );
-
 }

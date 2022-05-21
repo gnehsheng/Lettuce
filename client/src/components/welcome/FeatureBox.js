@@ -3,40 +3,44 @@ import styled from 'styled-components';
 import { colors } from '../common/colors';
 
 function FeatureBox() {
-  return <Row style={{ marginTop: '80px' }}>
-		<Hidden xs>
-			<Col xs={3}></Col>
-		</Hidden>
+  return (
+    <Row style={{ marginTop: '80px' }}>
+      <Hidden xs>
+        <Col xs={3} />
+      </Hidden>
 
-		{/* --------- Feature box -------- */}
-		<Col xs={12} md={2}>
-			<Box icon='tv-outline'>Host Video in a room</Box>
-		</Col>
-		<Col xs={12} md={2}>
-			<Box icon='sync-outline'>Sync video with each other</Box>
-		</Col>
-		<Col xs={12} md={2}>
-			<Box icon='chatbox-ellipses-outline'>Live chat with friends</Box>
-		</Col>
+      {/* --------- Feature box -------- */}
+      <Col xs={12} md={2}>
+        <Box icon="tv-outline">Host Video in a room</Box>
+      </Col>
+      <Col xs={12} md={2}>
+        <Box icon="sync-outline">Sync video with each other</Box>
+      </Col>
+      <Col xs={12} md={2}>
+        <Box icon="chatbox-ellipses-outline">Live chat with friends</Box>
+      </Col>
 
-		<Hidden xs>
-			<Col xs={3}></Col>
-		</Hidden>
-	</Row>
+      <Hidden xs>
+        <Col xs={3} />
+      </Hidden>
+    </Row>
+  );
 }
 
 function Box(props) {
-  return <StyledBox>
-		<ion-icon
-			name={props.icon}
-			style={{
-				fontSize: '2em',
-				paddingBottom: '10px',
-				color: colors.primaryColor,
-			}}
-		></ion-icon>
-		<div>{props.children}</div>
-	</StyledBox>
+  return (
+    <StyledBox>
+      <ion-icon
+        name={props.icon}
+        style={{
+			  fontSize: '2em',
+			  paddingBottom: '10px',
+			  color: colors.primaryColor,
+        }}
+      />
+      <div>{props.children}</div>
+    </StyledBox>
+  );
 }
 
 const StyledBox = styled.div`

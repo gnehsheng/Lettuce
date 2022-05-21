@@ -1,6 +1,6 @@
-import { UserContextProvider } from './contexts/UserContext'
-import { SignalContextProvider } from './contexts/SignalContext'
-import RoutesPath from './Routes'
+import { UserContextProvider } from './contexts/UserContext';
+import { SignalContextProvider } from './contexts/SignalContext';
+import RoutesPath from './Routes';
 
 function App() {
   return (
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

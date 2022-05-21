@@ -7,7 +7,6 @@ export const spinAnimation = keyframes`
 `;
 
 export function LoadingSpinner() {
-
   const StyledSpinner = styled.div`
 	border: 16px solid #f3f3f3; /* Light grey */
 	border-top: 16px solid ${colors.primaryColor}; /* Blue */
@@ -25,9 +24,8 @@ export function LoadingSpinner() {
     `;
 
   return (
-      <SpinnerContainer>
-          <StyledSpinner />
-        </SpinnerContainer>
+    <SpinnerContainer>
+      <StyledSpinner />
+    </SpinnerContainer>
   );
-
 }

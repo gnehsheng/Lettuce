@@ -1,9 +1,8 @@
-import styled from "styled-components"
-import { colors } from '../common/colors'
+import styled from 'styled-components';
+import { colors } from '../common/colors';
 
 export default function Options(props) {
-
-    const OptionsContainer = styled.div`
+  const OptionsContainer = styled.div`
 	height: 30px;
 	width: 100%;
 	display: flex;
@@ -15,9 +14,9 @@ export default function Options(props) {
 	box-shadow: 2px 2px 3px #eee;
 	box-sizing: border-box;
 	border-radius: 5px;
-    `
+    `;
 
-    const StyledOptionButton = styled.button`
+  const StyledOptionButton = styled.button`
 	margin: 0;
 	padding: 0 15px;
 	background-color: ${colors.accentColor};
@@ -43,41 +42,40 @@ export default function Options(props) {
 	&:last-child {
 		margin-right: 0;
 	}
-    `
+    `;
 
-    const OptionButton = ({ children, icon, ...props }) => {
-        return (
-            <StyledOptionButton {...props}>
-                <ion-icon name={icon} style={{ fontSize: '1.8em' }}></ion-icon>
-                &nbsp;{children}
-            </StyledOptionButton>
-        );
-    }
-
+  function OptionButton({ children, icon, ...props }) {
     return (
-        <OptionsContainer>
-            <OptionButton
-                icon='videocam'
-                title='Change to another video'
-                onClick={props.onVideoChange}
-            >
-                Change Video
-            </OptionButton>
-            <OptionButton
-                icon='share-social'
-                title='Invite friends to join this room'
-                onClick={props.onInvite}
-            >
-                Invite Friends
-            </OptionButton>
-            <OptionButton
-                icon='person-circle'
-                title='Allow only the host to control the video'
-                onClick={props.alertNotImplemented}
-            >
-                Host Only
-            </OptionButton>
-        </OptionsContainer>
-    )
+      <StyledOptionButton {...props}>
+        <ion-icon name={icon} style={{ fontSize: '1.8em' }} />
+        {children}
+      </StyledOptionButton>
+    );
+  }
 
+  return (
+    <OptionsContainer>
+      <OptionButton
+        icon="videocam"
+        title="Change to another video"
+        onClick={props.onVideoChange}
+      >
+        Change Video
+      </OptionButton>
+      <OptionButton
+        icon="share-social"
+        title="Invite friends to join this room"
+        onClick={props.onInvite}
+      >
+        Invite Friends
+      </OptionButton>
+      <OptionButton
+        icon="person-circle"
+        title="Allow only the host to control the video"
+        onClick={props.alertNotImplemented}
+      >
+        Host Only
+      </OptionButton>
+    </OptionsContainer>
+  );
 }

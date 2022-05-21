@@ -22,7 +22,7 @@ export default function Footer(props) {
                 Created by Ng Yong Sheng (Source at
                 <a
                     href={'https://github.com/gnehsheng?tab=repositories'}
-                    target='_blank'
+                    target=''
                 >
                     &nbsp;github
                 </a>)

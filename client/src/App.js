@@ -1,13 +1,15 @@
-import Welcome from './components/welcome/Welcome'
-import Footer from './components/common/Footer'
+import { UserContextProvider } from './contexts/UserContext'
+import { SignalContextProvider } from './contexts/SignalContext'
+import RoutesPath from './Routes'
 
 function App() {
   return (
-    <div className="App">
-      <Welcome />
-      <Footer />
-    </div>
+    <UserContextProvider>
+      <SignalContextProvider>
+        <RoutesPath />
+      </SignalContextProvider>
+    </UserContextProvider>
   );
 }
 
-export default App;
+export default App

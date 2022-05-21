@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import TopBar from '../common/TopBar'
 import Player from "./Player"
 import Options from './Options'
-import LoadingSpinner from '../common/LoadingSpinner'
+import { LoadingSpinner } from '../common/LoadingSpinner'
 import { createConnection, bindSocketEvents } from '../../utils/socket'
 import { getVideoId } from "../../utils/helper"
 import { SignalContext } from "../../contexts/SignalContext"
@@ -12,6 +12,23 @@ import { UserContext } from '../../contexts/UserContext'
 
 
 export default function Room(props) {
+
+    const showInviteModal = async () => {
+        await Swal.fire({
+            title: 'Invite friends with this link',
+            input: 'text',
+            inputValue: window.location.href,
+            confirmButtonText: 'Copy',
+            inputAttributes: {
+                readOnly: true,
+            },
+            width: '40%',
+            onClose: () => {
+                document.getElementsByClassName('swal2-input')[0].select();
+                document.execCommand('copy');
+            },
+        })
+    }
 
     const askVideoURL = async () => {
         const { value: url } = await Swal.fire({
@@ -36,7 +53,7 @@ export default function Room(props) {
     const alertNotImplemented = () => {
         alert('Not implemented')
     }
-
+    // eslint-disable-next-line
     const [isHost, setIsHost] = useState(false)
     const [socket, setSocket] = useState(null)
     const [roomLoading, setRoomLoading] = useState(true)
@@ -53,7 +70,7 @@ export default function Room(props) {
         let username = props.location.state && props.location.state.username
 
         if (!hostId) {
-            _isHost
+            _isHost = false
 
             if (!username) {
                 const usernamePrompt = await Swal.fire({
@@ -87,22 +104,24 @@ export default function Room(props) {
 
     useEffect(() => {
         init()
-    }, [])
+    }, // eslint-disable-next-line
+        []
+    )
 
-    return(
+    return (
         <React.Fragment>
             <TopBar />
             {roomLoading ? (
                 <LoadingSpinner />
             ) : (
-                <Container fluid style={{margin: '0 3%'}}>
+                <Container fluid style={{ margin: '0 3%' }}>
                     <Row>
                         <Col md={8}>
                             <Player socket={socket} videoId={userData.videoId} />
                         </Col>
                         <Col md={4}>
-                            <Options onInvite={showInviteModal} alertNotImplemented={alertNotImplemented} onVideoChange={onVideoChange} /> 
-                            
+                            <Options onInvite={showInviteModal} alertNotImplemented={alertNotImplemented} onVideoChange={onVideoChange} />
+
                         </Col>
                     </Row>
                 </Container>

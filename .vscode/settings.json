@@ -3,8 +3,4 @@
     "eslint.lintTask.enable": true,
     "eslint.run": "onType",
     "eslint.packageManager": "npm",
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true
-    }
-
 }

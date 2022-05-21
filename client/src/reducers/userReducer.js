@@ -1,4 +1,7 @@
 export const userReducer = (state, action) => {
+	const {
+		id, from, text, timestamp
+	} = action.data;
 	switch (action.type) {
 		case 'UPDATE_USERNAME':
 			return {
@@ -16,7 +19,7 @@ export const userReducer = (state, action) => {
 				userList: action.users,
 			};
 		case 'UPDATE_MESSAGES':
-			const { id, from, text, timestamp } = action.data;
+
 			return {
 				...state,
 				messages: [

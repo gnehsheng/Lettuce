@@ -1,9 +1,9 @@
-import { Row, Col, Hidden } from 'react-grid-system'
-import styled from 'styled-components'
-import { colors } from '../common/colors'
+import { Row, Col, Hidden } from 'react-grid-system';
+import styled from 'styled-components';
+import { colors } from '../common/colors';
 
-const FeatureBox = (props) => (
-	<Row style={{ marginTop: '80px' }}>
+function FeatureBox() {
+  return <Row style={{ marginTop: '80px' }}>
 		<Hidden xs>
 			<Col xs={3}></Col>
 		</Hidden>
@@ -23,10 +23,10 @@ const FeatureBox = (props) => (
 			<Col xs={3}></Col>
 		</Hidden>
 	</Row>
-);
+}
 
-const Box = (props) => (
-	<StyledBox>
+function Box(props) {
+  return <StyledBox>
 		<ion-icon
 			name={props.icon}
 			style={{
@@ -37,7 +37,7 @@ const Box = (props) => (
 		></ion-icon>
 		<div>{props.children}</div>
 	</StyledBox>
-);
+}
 
 const StyledBox = styled.div`
 	display: flex;

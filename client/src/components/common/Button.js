@@ -7,7 +7,7 @@ export default function Button({ children, isLoading, ...props }) {
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	justify-content: centerF;
+	justify-content: center;
 	padding: 6px;
 	min-width: 90px;
 	outline: none;

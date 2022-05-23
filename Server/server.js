@@ -18,7 +18,7 @@ app.get('/api', (req,res, next) => {
 
 ioUtils.setupIO(io);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`running on port ${PORT}`)
   })
 

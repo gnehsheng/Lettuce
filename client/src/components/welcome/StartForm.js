@@ -59,15 +59,15 @@ export default function Forms(props) {
     );
   }
 
-  function _onHost(e) {
-    e.preventDefault();
-    props._onHost(hostDisplayName, videoUrl);
-  }
+  const _onHost = (e) => {
+		e.preventDefault();
+		props.onHost(hostDisplayName, videoUrl);
+	}
 
-  function _onJoin(e) {
-    e.preventDefault();
-    props._onJoin(joinDisplayName, joinUrl);
-  }
+	const _onJoin = (e) => {
+		e.preventDefault();
+		props.onJoin(joinDisplayName, joinUrl);
+	}
 
   return (
     <>

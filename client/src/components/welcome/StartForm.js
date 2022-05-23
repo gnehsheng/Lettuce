@@ -79,7 +79,7 @@ const StartForm = (props) => {
 							id='url'
 							value={videoUrl}
 							onChange={(e) => setVideoUrl(e.target.value)}
-							placeholder='https://www.youtube.com/watch?v=zFhfksjf_mY'
+							placeholder='https://www.youtube.com'
 							required
 						/>
 					</Controls>
@@ -115,7 +115,7 @@ const StartForm = (props) => {
 							id='url'
 							value={joinUrl}
 							onChange={(e) => setJoinUrl(e.target.value)}
-							placeholder='redparty.netlify.app/room/asD2123f'
+							placeholder=''
 						/>
 					</Controls>
 				</CustomForm>

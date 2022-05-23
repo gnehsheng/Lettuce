@@ -76,13 +76,13 @@ export default function Welcome(props) {
           {/* --------- Intro Message -------- */}
           <Col xs={12} md={4}>
             <IntroMessage>
-              Host
+              Watch
               {' '}
               <span style={{ color: colors.primaryColor }}>
                 Youtube
               </span>
               {' '}
-              Watch Party with Friends
+               with Friends
             </IntroMessage>
             <Button
               style={styles.heroButton}

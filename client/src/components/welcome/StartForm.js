@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Col } from 'react-grid-system';
 import { Label, Input } from '../common/FormControls';
-
 import Button from '../common/Button';
 import Card from '../common/Card';
 

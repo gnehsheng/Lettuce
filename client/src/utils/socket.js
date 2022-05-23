@@ -2,7 +2,7 @@ import { io } from 'socket.io-client';
 import { showToast } from './helper';
 
 export function createConnection(name, roomId = null, videoId = null) {
-  return new Promise(() => {
+  return new Promise((resolve) => {
     const socket = io(process.env.REACT_APP_SERVER, { path: '/socket' });
     socket.on('connect', () => {
       socket.emit('join', {
@@ -11,6 +11,7 @@ export function createConnection(name, roomId = null, videoId = null) {
         userId: socket.id,
         videoId,
       });
+      resolve(socket)
     });
   });
 }

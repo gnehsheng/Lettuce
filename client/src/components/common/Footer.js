@@ -1,7 +1,23 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default function Footer() {
-  const StyledFooter = styled.div`
+
+const Footer = (props) => (
+	<StyledFooter>
+		<div style={{ display: 'flex', alignItems: 'center' }}>
+        Created by Ng Yong Sheng (Source at
+        <a
+          href="https://github.com/gnehsheng?tab=repositories"
+          target=""
+        >
+                    &nbsp;github
+        </a>
+        )
+      </div>
+	</StyledFooter>
+);
+
+const StyledFooter = styled.div`
 	height: 45px;
 	margin-top: -45px;
 	display: flex;
@@ -15,19 +31,6 @@ export default function Footer() {
 	flex-wrap: wrap;
 	padding: 0 5%;
 	text-align: center;
-    `;
-  return (
-    <StyledFooter>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        Created by Ng Yong Sheng (Source at
-        <a
-          href="https://github.com/gnehsheng?tab=repositories"
-          target=""
-        >
-                    &nbsp;github
-        </a>
-        )
-      </div>
-    </StyledFooter>
-  );
-}
+`;
+
+export default Footer;

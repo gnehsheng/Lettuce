@@ -1,15 +1,16 @@
+import React from 'react';
 import styled from 'styled-components';
-import Header from '../common/Header';
+import { Header } from '../common/Header';
 
-export default function Intro() {
-  const P = styled.p`
-    font-size: 1em;
-    `;
+const Intro = (props) => (
+	<React.Fragment>
+		<Header>YT Party</Header>
+		<P>Watch Youtube with friends!</P>
+	</React.Fragment>
+);
 
-  return (
-    <>
-      <Header>YT Party</Header>
-      <P>Watch Youtube with your friends!</P>
-    </>
-  );
-}
+const P = styled.p`
+	font-size: 1em;
+`;
+
+export default Intro;

@@ -1,130 +1,147 @@
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import Swal from 'sweetalert2';
-import TopBar from '../common/TopBar';
+import Topbar from '../common/Topbar';
 import Player from './Player';
+import Chat from './Chat/Chat';
 import Options from './Options';
-import { LoadingSpinner } from '../common/LoadingSpinner';
+import { Spinner } from '../common/Spinner';
 import { createConnection, bindSocketEvents } from '../../utils/socket';
 import { getVideoId } from '../../utils/helper';
-import { SignalContext } from '../../contexts/SignalContext';
 import { UserContext } from '../../contexts/UserContext';
+import { SignalContext } from '../../contexts/SignalContext';
 
-export default function Room(props) {
-  const showInviteModal = async () => {
-    await Swal.fire({
-      title: 'Invite friends with this link',
-      input: 'text',
-      inputValue: window.location.href,
-      confirmButtonText: 'Copy',
-      inputAttributes: {
-        readOnly: true,
-      },
-      width: '40%',
-      onClose: () => {
-        document.getElementsByClassName('swal2-input')[0].select();
-        document.execCommand('copy');
-      },
-    });
-  };
+function Room(props) {
+	const [isHost, setHost] = useState(false);
+	const [socket, setSocket] = useState(null);
+	const [roomLoading, setRoomLoading] = useState(true);
 
-  const askVideoURL = async () => {
-    const { value: url } = await Swal.fire({
-      title: 'YouTube Video URL',
-      input: 'url',
-      inputPlaceholder: 'https://www.youtube.com/',
-    });
+	const { dispatch: userDispatch, userData } = useContext(UserContext);
+	const { dispatch: signalDispatch } = useContext(SignalContext);
 
-    return url;
-  };
+	let _isHost = false;
+	let _socket = null;
 
-  const onVideoChange = async () => {
-    const newURL = await askVideoURL();
+	const init = async () => {
+		const hostId = props.location.state && props.location.state.hostId;
+		const videoId = props.location.state && props.location.state.videoId;
+		let username = props.location.state && props.location.state.username;
 
-    if (newURL && socket) {
-      console.log(_socket);
-      const videoId = getVideoId(newURL);
-      socket.emit('changeVideo', { videoId });
-    }
-  };
+		if (!hostId) {
+			// Not a host
+			_isHost = false;
 
-  const alertNotImplemented = () => {
-    alert('Not implemented');
-  };
-  // eslint-disable-next-line
-    const [isHost, setIsHost] = useState(false)
-  const [socket, setSocket] = useState(null);
-  const [roomLoading, setRoomLoading] = useState(true);
+			// TODO: Show loading screen till connection is created
+			if (!username) {
+				// ask for username
+				const usernamePrompt = await Swal.fire({
+					title: 'Enter your display name',
+					input: 'text',
+					allowOutsideClick: false,
+				});
+				username = usernamePrompt.value;
+			}
 
-  const { dispatch: userDispatch, userData } = useContext(UserContext);
-  const { dispatch: signalDispatch } = useContext(SignalContext);
+			const roomId = props.match.params.id;
+			_socket = await createConnection(username, roomId);
+		} else {
+			_isHost = true;
+			_socket = props.location.socket;
 
-  let _isHost = false;
-  let _socket = null;
+			// update videoid in global context
+			userDispatch({ type: 'UPDATE_VIDEO_ID', videoId });
+			showInviteModal();
+		}
 
-  const init = async () => {
-    const hostId = props.location.state && props.location.state.hostId;
-    const videoId = props.location.state && props.location.state.videoId;
-    let username = props.location.state && props.location.state.username;
+		// update username in global context
+		userDispatch({ type: 'UPDATE_USERNAME', username });
 
-    if (!hostId) {
-      _isHost = false;
+		setHost(_isHost);
+		setSocket(_socket);
+		bindSocketEvents(_socket, {
+			userDispatch,
+			signalDispatch,
+		});
 
-      if (!username) {
-        const usernamePrompt = await Swal.fire({
-          title: 'Enter your username',
-          input: 'text',
-          allowOutsideClick: false,
-        });
-        username = usernamePrompt.value;
-      }
+		console.log('is host', isHost);
+		setRoomLoading(false);
+	};
 
-      const roomId = props.match.params.id;
-      _socket = await createConnection(username, roomId);
-    } else {
-      _isHost = true;
-      _socket = props.location.socket;
+	useEffect(
+		() => {
+			init();
+		}, // eslint-disable-next-line
+		[]
+	);
 
-      userDispatch({ type: 'UPDATE_VIDEO_ID', videoId });
-      showInviteModal();
-    }
+	const showInviteModal = async () => {
+		await Swal.fire({
+			title: 'Invite friends with this link',
+			input: 'text',
+			inputValue: window.location.href,
+			confirmButtonText: 'Copy',
+			inputAttributes: {
+				readOnly: true,
+			},
+			width: '40%',
+			onClose: () => {
+				document.getElementsByClassName('swal2-input')[0].select();
+				document.execCommand('copy');
+			},
+		});
+	};
 
-    userDispatch({ type: 'UPDATE_USERNAME', username });
+	const askVideoURL = async () => {
+		const { value: url } = await Swal.fire({
+			title: 'YouTube Video URL',
+			input: 'url',
+			inputPlaceholder: 'https://www.youtube.com/watch?v=BTYAsjAVa3I',
+		});
 
-    setIsHost(_isHost);
-    setSocket(_socket);
-    bindSocketEvents(_socket, {
-      userDispatch,
-      signalDispatch,
-    });
-    setRoomLoading(false);
-  }
+		return url;
+	};
 
-  useEffect(
-    () => {
-      init();
-    }, // eslint-disable-next-line
-        []
-  );
+	const onVideoChange = async () => {
+		const newURL = await askVideoURL();
 
-  return (
-    <>
-      <TopBar />
-      {roomLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <Container fluid style={{ margin: '0 3%' }}>
-          <Row>
-            <Col md={8}>
-              <Player socket={socket} videoId={userData.videoId} />
-            </Col>
-            <Col md={4}>
-              <Options onInvite={showInviteModal} alertNotImplemented={alertNotImplemented} onVideoChange={onVideoChange} />
+		if (newURL && socket) {
+			console.log(_socket);
+			const videoId = getVideoId(newURL);
+			socket.emit('changeVideo', { videoId });
+		}
+	};
 
-            </Col>
-          </Row>
-        </Container>
-      )}
-    </>
-  );
+	const alertNotImplemented = () => {
+		alert('Not implemented');
+	};
+
+	return (
+		<React.Fragment>
+			<Topbar />
+			{roomLoading ? (
+				<Spinner />
+			) : (
+				<Container fluid style={{ margin: '0 3%' }}>
+					<Row>
+						<Col md={8}>
+							<Player
+								socket={socket}
+								videoId={userData.videoId}
+							/>
+						</Col>
+						<Col md={4}>
+							<Options
+								onInvite={showInviteModal}
+								alertNotImplemented={alertNotImplemented}
+								onVideoChange={onVideoChange}
+							/>
+							<Chat socket={socket} />
+						</Col>
+					</Row>
+				</Container>
+			)}
+		</React.Fragment>
+	);
 }
+
+export default Room;

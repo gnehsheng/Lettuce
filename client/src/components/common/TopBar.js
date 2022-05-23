@@ -1,8 +1,26 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'react-grid-system';
+import { colors } from '../../config/colors';
 
-export default function TopBar() {
-  const StyledBar = styled.div`
+const Topbar = (props) => (
+	<Row nogutter>
+		<Col xs={12}>
+			<StyledBar>
+				<img
+					src='watch2gether-logo.png'
+					alt='logo'
+					width='auto'
+					height='69px'
+					style={{ marginRight: '8px' }}
+				/>
+				
+			</StyledBar>
+		</Col>
+	</Row>
+);
+
+const StyledBar = styled.div`
 	display: flex;
 	flex: 1;
 	height: 8vh;
@@ -11,20 +29,6 @@ export default function TopBar() {
 	justify-content: center;
 	font-size: 1.8em;
 	font-weight: 800;
-    `;
-  return (
-    <Row nogutter>
-      <Col xs={12}>
-        <StyledBar>
-          <img
-            src="/watch2gether-logo.png"
-            alt="logo"
-            width="auto"
-            height="85px"
-            style={{ marginRight: '8px' }}
-          />
-        </StyledBar>
-      </Col>
-    </Row>
-  );
-}
+`;
+
+export default Topbar;

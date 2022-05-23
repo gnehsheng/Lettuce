@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Label, Input, Button, Card } from '../common';
 import { Col } from 'react-grid-system';
-import { Label, Input } from '../common/FormControls';
-import Button from '../common/Button';
-import Card from '../common/Card';
-
 
 function CustomForm(props) {
 	const { onSubmit, buttonLabel, header, loading } = props;
@@ -34,7 +31,7 @@ function CustomForm(props) {
 	);
 }
 
-const StartForm = (props) => {
+const Forms = (props) => {
 	const [hostDisplayName, setHostDisplayName] = useState('');
 	const [videoUrl, setVideoUrl] = useState('');
 	const [joinDisplayName, setJoinDisplayName] = useState('');
@@ -79,7 +76,7 @@ const StartForm = (props) => {
 							id='url'
 							value={videoUrl}
 							onChange={(e) => setVideoUrl(e.target.value)}
-							placeholder='https://www.youtube.com'
+							placeholder='https://www.youtube.com/watch?v=zFhfksjf_mY'
 							required
 						/>
 					</Controls>
@@ -115,7 +112,7 @@ const StartForm = (props) => {
 							id='url'
 							value={joinUrl}
 							onChange={(e) => setJoinUrl(e.target.value)}
-							placeholder=''
+							placeholder='redparty.netlify.app/room/asD2123f'
 						/>
 					</Controls>
 				</CustomForm>
@@ -146,4 +143,4 @@ const BigHeader = styled.h1`
 	margin-top: -50px;
 `;
 
-export default StartForm;
+export default Forms;

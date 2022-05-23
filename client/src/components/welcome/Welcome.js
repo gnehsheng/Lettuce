@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Container, Row, Col, Hidden,
-} from 'react-grid-system';
+import { createConnection } from '../../utils/socket';
+import { Container, Row, Col, Hidden } from 'react-grid-system';
 import styled from 'styled-components';
-import TopBar from '../common/TopBar';
+import Topbar from '../common/Topbar';
 import StartForm from './StartForm';
 import FeatureBox from './FeatureBox';
-import Button from '../common/Button';
-import { colors } from '../common/colors';
-import { createConnection } from '../../utils/socket';
+import { Button } from '../common';
+import { colors } from '../../config/colors';
 import { getVideoId } from '../../utils/helper';
 
 function Welcome(props) {
@@ -45,9 +43,10 @@ function Welcome(props) {
 			state: { username },
 		});
 	};
-  return (
+
+	return (
 		<React.Fragment>
-			<TopBar />
+			<Topbar />
 			<Container fluid style={{ height: '92vh' }}>
 				{/* topbar is 8vh in height, so (100 - 8) = 92 */}
 				<Row style={{ paddingTop: '80px' }} align='center'>
@@ -58,11 +57,11 @@ function Welcome(props) {
 					{/* --------- Intro Message -------- */}
 					<Col xs={12} md={4}>
 						<IntroMessage>
-							Host{' '}
+							Watch{' '}
 							<span style={{ color: colors.primaryColor }}>
 								Youtube
 							</span>{' '}
-							Watch Party with Friends
+							with Friends
 						</IntroMessage>
 						<Button
 							style={styles.heroButton}

@@ -62,7 +62,7 @@ export default function Room(props) {
   let _isHost = false;
   let _socket = null;
 
-  async function init() {
+  const init = async () => {
     const hostId = props.location.state && props.location.state.hostId;
     const videoId = props.location.state && props.location.state.videoId;
     let username = props.location.state && props.location.state.username;
